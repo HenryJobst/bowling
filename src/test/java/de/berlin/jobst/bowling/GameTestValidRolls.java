@@ -23,63 +23,63 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class GameTestValidRolls {
 
-	@Parameter
-	public int[] rolls;
-	
-	@Parameter(1)
-	public int score;
+    @Parameter
+    public int[] rolls;
 
-	@Parameters(name = "Run {index}: rolls={0}, expected score={1}")
-	public static Iterable<Object[]> data() {
-		return Arrays.asList(new Object[][] {
-			// 1 frame
-			{ new int[] {0}, 0 },
-			{ new int[] {1}, 1 },
-			{ new int[] {10}, 10 },
-			
-			{ new int[] {0, 0}, 0 },
-			{ new int[] {0, 1}, 1 },			
-			{ new int[] {0, 10}, 10 },
-			
-			{ new int[] {1, 0}, 1 },
-			{ new int[] {1, 9}, 10 },
+    @Parameter(1)
+    public int score;
 
-			// 2 frames (no Spare/no Strike)
-			{ new int[] {0, 0, 0}, 0 },
-			{ new int[] {1, 1, 1}, 3 },
-			
-			{ new int[] {0, 0, 0, 0}, 0 },
-			{ new int[] {1, 1, 1, 1}, 4 },
-			{ new int[] {8, 1, 8, 1}, 18 },
-			
-			// 10 frames (no Spare/no Strike)
-			// Minimum game
-			{ new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 0 },
-			{ new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 20 },
-			{ new int[] {8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1}, 90 },
-			
-			// 2nd partial frame after spare
-			{ new int[] {9, 1, 1}, 12 },
-			// 2nd partial frame after strike
-			{ new int[] {10, 1}, 12 },
-			
-			// 2nd frame after spare
-			{ new int[] {9, 1, 9, 1}, 29 },
-			// 2nd frame after strike
-			{ new int[] {10, 9, 1}, 30 },
-			// 2nd strike after strike	
-			{ new int[] {10, 10, 5, 5}, 55 },
-			
-			// Specification example
-			{ new int[] {1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6}, 133 },
-			
-			// Maximum game
-			{ new int[] {10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}, 300 },
-			});
-	}
+    @Parameters(name = "Run {index}: rolls={0}, expected score={1}")
+    public static Iterable<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                // 1 frame
+                {new int[]{0}, 0},
+                {new int[]{1}, 1},
+                {new int[]{10}, 10},
 
-	@Test
-	public void test() {
-		assertEquals(score, Game.getScore(rolls));
-	}
+                {new int[]{0, 0}, 0},
+                {new int[]{0, 1}, 1},
+                {new int[]{0, 10}, 10},
+
+                {new int[]{1, 0}, 1},
+                {new int[]{1, 9}, 10},
+
+                // 2 frames (no Spare/no Strike)
+                {new int[]{0, 0, 0}, 0},
+                {new int[]{1, 1, 1}, 3},
+
+                {new int[]{0, 0, 0, 0}, 0},
+                {new int[]{1, 1, 1, 1}, 4},
+                {new int[]{8, 1, 8, 1}, 18},
+
+                // 10 frames (no Spare/no Strike)
+                // Minimum game
+                {new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 0},
+                {new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 20},
+                {new int[]{8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1}, 90},
+
+                // 2nd partial frame after spare
+                {new int[]{9, 1, 1}, 12},
+                // 2nd partial frame after strike
+                {new int[]{10, 1}, 12},
+
+                // 2nd frame after spare
+                {new int[]{9, 1, 9, 1}, 29},
+                // 2nd frame after strike
+                {new int[]{10, 9, 1}, 30},
+                // 2nd strike after strike
+                {new int[]{10, 10, 5, 5}, 55},
+
+                // Specification example
+                {new int[]{1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6}, 133},
+
+                // Maximum game
+                {new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}, 300},
+        });
+    }
+
+    @Test
+    public void test() {
+        assertEquals(score, Game.getScore(rolls));
+    }
 }
