@@ -1,17 +1,17 @@
 package de.berlin.jobst.bowling;
 
-public class Frame {
+class Frame {
 	
-	public Frame(int frameIdx) {
+	Frame(int frameIdx) {
 		super();
 		this.frameIdx = frameIdx;
 	}
 
-	public boolean isLastFrame() {
+	boolean isLastFrame() {
 		return frameIdx == 9;
 	}
 	
-	public int getScore() {
+	int getScore() {
 		int score = 0;
 		for (int roll = 0; roll < rollIdx; roll++) {
 			score += rolls[roll];
@@ -19,7 +19,7 @@ public class Frame {
 		return score;
 	}
 
-	public void rollBall(int i) {
+	void rollBall(int i) {
 		if ((i < 0) || (i > 10) || (!isLastFrame() && (getScore() + i) > 10)) {
 			throw new IndexOutOfBoundsException("A roll of " + i + " is invalid.");
 		}
@@ -30,34 +30,34 @@ public class Frame {
 		rollIdx++;
 	}
 
-	public boolean isFinished() {
+	boolean isFinished() {
 		if (getScore() == 10) {
 			return true;
 		}
 		return (rollIdx > 1);
 	}
 
-	public boolean isSpare() {
+	boolean isSpare() {
 		return (getScore() == 10 && rollIdx == 2);
 	}
 	
-	public boolean isStrike() {
+	boolean isStrike() {
 		return (getScore() == 10 && rollIdx == 1);
 	}
 
-	public int getFirstRoll() {
+	int getFirstRoll() {
 		return rolls[0];
 	}
 
-	public int getSecondRoll() {
+	int getSecondRoll() {
 		return rolls[1];
 	}
 	
-	public boolean isRolled() {
+	boolean isRolled() {
 		return rollIdx != 0;
 	}
 	
-	private int frameIdx = 0; 
-	private int[] rolls = new int[] { 0, 0, 0 };
+	private final int frameIdx;
+	private final int[] rolls = new int[] { 0, 0, 0 };
 	private int rollIdx = 0;
 }

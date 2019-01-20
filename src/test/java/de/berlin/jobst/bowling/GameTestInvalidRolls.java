@@ -1,12 +1,12 @@
 package de.berlin.jobst.bowling;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
 
 
 @RunWith(Parameterized.class)
@@ -27,9 +27,6 @@ public class GameTestInvalidRolls {
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void test() {
-		Game game = Game.startGame();
-		for (int i = 0; i < rolls.length; i++) {
-			game.rollBall(rolls[i]);
-		}
+		Game.getScore(rolls);
 	}
 }

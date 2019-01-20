@@ -1,12 +1,16 @@
 package de.berlin.jobst.bowling;
 
-public class Game {
+class Game {
 
-	public static Game startGame() {
-		return new Game();
+	static int getScore(int[] rolls) {
+		Game game = new Game();
+		for (int roll : rolls) {
+			game.rollBall(roll);
+		}
+		return game.getScore();
 	}
 
-	public void rollBall(int i) {
+	private void rollBall(int i) {
 		Frame frame = frames[frameIdx];
 		if (frame == null) {
 			frame = new Frame(frameIdx);
@@ -23,7 +27,7 @@ public class Game {
 		return (frames[frameIdx].isLastFrame() && frames[frameIdx].isFinished());
 	}
 
-	public int getScore() {
+	private int getScore() {
 		System.out.println("********** Game **********");
 		int score = 0;
 		for (int idx = 0; idx <= frameIdx; idx++)
@@ -70,6 +74,6 @@ public class Game {
 		return frames[idx];
 	}
 
-	private Frame[] frames = new Frame[10];
+	private final Frame[] frames = new Frame[10];
 	private int frameIdx = 0;
 }
