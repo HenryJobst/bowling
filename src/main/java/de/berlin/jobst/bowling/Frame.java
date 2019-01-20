@@ -2,6 +2,10 @@ package de.berlin.jobst.bowling;
 
 class Frame {
 
+    private final int frameIdx;
+    private final int[] rolls = new int[]{0, 0, 0};
+    private int rollIdx = 0;
+
     Frame(int frameIdx) {
         super();
         this.frameIdx = frameIdx;
@@ -20,11 +24,26 @@ class Frame {
     }
 
     void rollBall(int i) {
-        if ((i < 0) || (i > 10) || (!isLastFrame() && (getScore() + i) > 10)) {
-            throw new IndexOutOfBoundsException("A roll of " + i + " is invalid.");
+        int score = getScore();
+        if (isLastFrame()) {
+            if (isSpare()) {
+                score -= 10;
+            } else {
+                if (getFirstRoll() == 10) {
+                    score -= 10;
+                }
+                if (getSecondRoll() == 10) {
+                    score -= 10;
+                }
+            }
         }
+
+        if ((i < 0) || (i > 10) || ((score + i) > 10)) {
+            throw new UnsupportedOperationException("A roll of " + i + " is invalid.");
+        }
+
         if (rollIdx > 2) {
-            throw new IndexOutOfBoundsException("Invalid roll in frame.");
+            throw new UnsupportedOperationException("Invalid roll in frame.");
         }
         rolls[rollIdx] = i;
         rollIdx++;
@@ -42,7 +61,7 @@ class Frame {
     }
 
     boolean isStrike() {
-        return (getScore() == 10 && rollIdx == 1);
+        return (getScore() == 10 && rollIdx == 1 || getScore() == 20 && rollIdx == 2);
     }
 
     int getFirstRoll() {
@@ -57,7 +76,7 @@ class Frame {
         return rollIdx != 0;
     }
 
-    private final int frameIdx;
-    private final int[] rolls = new int[]{0, 0, 0};
-    private int rollIdx = 0;
+    int getRoll() {
+        return rollIdx + 1;
+    }
 }

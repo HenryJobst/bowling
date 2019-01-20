@@ -21,11 +21,11 @@ public class GameTestInvalidRolls {
                 {new int[]{-1}},
                 {new int[]{11}},
                 {new int[]{1, 10}},
-
+                {new int[]{8, 2, 5, 5, 8, 2, 9, 1, 5, 4, 6, 4, 8, 1, 7, 2, 10, 4, 8}}
         });
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test() {
         Game.getScore(rolls);
     }
