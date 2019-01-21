@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 // calculate score
 
 @RunWith(Parameterized.class)
-public class GameTestValidRolls {
+public class ValidRollsTests {
 
     @Parameter
     public int[] rolls;

@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 
 @RunWith(Parameterized.class)
-public class GameTestInvalidRolls {
+public class InvalidRollsTests {
 
     @Parameter
     public int[] rolls;
