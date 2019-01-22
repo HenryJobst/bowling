@@ -46,7 +46,7 @@ class Game {
     }
 
     void rollBall(int i) {
-        Frame frame = frames[frameIdx];
+        Frame frame = at(frameIdx);
         if (frame == null) {
             frame = new Frame(frameIdx);
             frames[frameIdx] = frame;
@@ -59,7 +59,8 @@ class Game {
     }
 
     boolean isUnfinished() {
-        return (!frames[frameIdx].isLastFrame() || !frames[frameIdx].isFinished());
+        Frame frame = at(frameIdx);
+        return (frame == null || !frame.isLastFrame() || !frame.isFinished());
     }
 
     int getScore() {
