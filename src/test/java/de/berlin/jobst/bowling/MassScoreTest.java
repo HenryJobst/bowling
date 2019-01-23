@@ -1,7 +1,6 @@
 
 package de.berlin.jobst.bowling;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -42,8 +41,8 @@ class MassScoreTest {
         assertEquals(Game.getScore(rolls), Integer.parseInt(score));
     }
 
+    // Test with generated test data from: https://github.com/HenryJobst/splits-happen
     @ParameterizedTest
-    @Disabled // the given test data file is unfortunately erroneous - maybe later fixed
     @CsvFileSource(resources = "/bowling_data_5000.csv", numLinesToSkip = 1)
     void testWithCsvFileSource(String rollsAsString, String score) {
         int[] rolls = Game.transformSymbols(rollsAsString);

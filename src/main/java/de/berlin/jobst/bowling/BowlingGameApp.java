@@ -17,7 +17,6 @@ class BowlingGameApp {
         con.printf("\n*** Starte neues Bowling Spiel. ***\n\n");
 
         Game game = new Game();
-        game.setSilent();
 
         ArrayList<Integer> validRolls = new ArrayList<>();
 

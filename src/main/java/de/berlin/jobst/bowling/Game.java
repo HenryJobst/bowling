@@ -4,6 +4,19 @@ import java.util.Arrays;
 
 class Game {
 
+    public enum ScorePrintout {
+        ON, OFF
+    }
+
+    Game() {
+        this(ScorePrintout.OFF);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private Game(ScorePrintout scorePrintout) {
+        this.scorePrintout = scorePrintout;
+    }
+
     static int[] transformSymbols(String in) {
         /*
             Idea to use this common representation and original python code by Juan L. Kehoe
@@ -64,7 +77,7 @@ class Game {
     }
 
     int getScore() {
-        if (!silent) System.out.println("********** Game **********");
+        if (scorePrintout == ScorePrintout.ON) System.out.println("********** Game **********");
         int score = 0;
         for (int idx = 0; idx <= frameIdx; idx++)
             score = getFrameScore(score, idx);
@@ -77,7 +90,7 @@ class Game {
             return score;
         score += frame.getScore();
         score = getBonusScore(score, idx);
-        if (frame.isRolled() && !silent) {
+        if (frame.isRolled() && scorePrintout == ScorePrintout.ON) {
             System.out.println("Frame: " + (idx + 1) + " Score: " + score);
         }
         return score;
@@ -106,10 +119,6 @@ class Game {
         return score;
     }
 
-    void setSilent() {
-        this.silent = true;
-    }
-
     private Frame at(int idx) {
         return frames[idx];
     }
@@ -126,5 +135,5 @@ class Game {
 
     private final Frame[] frames = new Frame[10];
     private int frameIdx = 0;
-    private boolean silent = false;
+    private final ScorePrintout scorePrintout;
 }
